@@ -1,0 +1,33 @@
+{
+  "name": "mysongapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+  "engines": {
+    "node":"4.2.x",
+    "npm":"2.14.x"
+  },
+
+  "author": "",
+  "license": "ISC",
+
+
+  "dependencies": {
+    "bower": "^1.7.2",
+    "express": "^4.13.3",
+    "mongoose": "^4.3.5",
+    "socket.io": "^1.4.3",
+    "bcrypt-nodejs": "*",
+    "body-parser": "~1.0.0",
+    "connect-flash": "*",
+    "cookie-parser": "~1.0.1",
+    "debug": "~0.7.4",
+    "jsonwebtoken": "^5.5.0",
+    "morgan": "~1.0.0",    
+    "static-favicon": "~1.0.0"
+  }
+}
