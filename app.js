@@ -30,7 +30,7 @@ app.get('/', function(req, res){
 });
 
 var socketController = require('./server/controllers/socketController');
-socketController(io);
+// socketController(io);
 
 /*io.on('connection', function(socket){  
 
