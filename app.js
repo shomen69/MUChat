@@ -71,6 +71,8 @@ var socketController = require('./server/controllers/socketController');
   });
 });*/
 
-http.listen(port, function () {
+/*http.listen(port, function () {
   console.log('Server listening at port %d', port);
-});
+});*/
+app.listen(config.port);
+console.log('Server listening at port %d', port);
