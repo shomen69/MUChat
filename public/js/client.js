@@ -1,4 +1,4 @@
-var socket = io();
+var socket = io.connect(window.location.hostname);
 
 var user = {};
 
