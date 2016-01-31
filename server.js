@@ -4,6 +4,9 @@ var app = express();
 var io = require('socket.io')(http);
 var http = require('http').Server(app);
 
+io.set('transports', ['xhr-polling']);
+io.set('polling duration', 10);
+
 var port = process.env.PORT || 3090;
 app.use(express.static(__dirname + '/public'))
 
