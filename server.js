@@ -1,7 +1,9 @@
 const util = require('util');
 var express = require('express');
 var app = express();
+var io = require('socket.io')(http);
 var http = require('http').Server(app);
+
 var port = process.env.PORT || 3090;
 app.use(express.static(__dirname + '/public'))
 
