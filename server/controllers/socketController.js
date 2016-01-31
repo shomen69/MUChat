@@ -91,12 +91,12 @@ module.exports = function(io){
 
 		socket.on('typing',function(data){
 			console.log('inside typing------data :'+JSON.stringify(data));
-			sockets[data.from].emit('typing',{from:data.from});
+			sockets[data.to].emit('typing',{from:data.from});
 		})
 
 		socket.on('stop_typing',function(data){
 			console.log('inside stop_typing------data :'+JSON.stringify(data));
-			sockets[data.from].emit('stop_typing',{from:data.from});
+			sockets[data.to].emit('stop_typing',{from:data.from});
 		})
 
 		socket.on('disconnect', function () {

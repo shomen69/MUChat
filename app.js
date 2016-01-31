@@ -30,7 +30,7 @@ app.get('/', function(req, res){
 });
 
 var socketController = require('./server/controllers/socketController');
-// socketController(io);
+socketController(io);
 
 /*io.on('connection', function(socket){  
 
@@ -71,8 +71,8 @@ var socketController = require('./server/controllers/socketController');
   });
 });*/
 
-/*http.listen(port, function () {
+http.listen(port, function () {
   console.log('Server listening at port %d', port);
-});*/
-app.listen(config.port);
-console.log('Server listening at port %d', port);
+});
+/*app.listen(port);
+console.log('Server listening at port %d', port);*/
