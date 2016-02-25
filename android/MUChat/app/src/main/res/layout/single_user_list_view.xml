@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="40dp"
+              android:layout_marginTop="5dp"
+              android:orientation="horizontal"
+              android:background="@drawable/s_user_bg_state"
+              android:weightSum="1"
+              android:paddingLeft="5dp"
+              android:paddingRight="5dp">
+    <TextView
+        android:layout_weight="0.15"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/user_name"
+        android:gravity="center_vertical"
+        android:textColor="#000000"/>
+    <TextView
+        android:layout_weight="0.85"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="0"
+        android:id="@+id/notification_counter"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_gravity="center"
+        android:background="@drawable/noti_rounded_bg"
+        android:textColor="#ffffff"/>
+
+</LinearLayout>

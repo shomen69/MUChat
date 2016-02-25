@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.shomen.MUChat.Main2Activity">
+    <item
+        android:id="@+id/action_settings"
+        android:title="settings"
+        android:icon="@drawable/abc_ic_menu_moreoverflow_mtrl_alpha"
+        app:showAsAction="always">
+
+        <menu>
+
+            <item
+                android:id="@+id/action_login"
+                android:title="Login"
+                app:showAsAction="never" />
+
+            <item
+                android:id="@+id/action_logout"
+                android:title="Logout"
+                app:showAsAction="never" />
+
+        </menu>
+    </item>
+
+</menu>
