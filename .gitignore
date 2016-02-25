@@ -1,2 +1,11 @@
 node/MUChat/node_modules
 node/MUChat/public/songs
+
+android/MUChat/*.iml
+android/MUChat/.gradle
+android/MUChat/local.properties
+android/MUChat/.idea/workspace.xml
+android/MUChat/.idea/libraries
+android/MUChat/.DS_Store
+android/MUChat/build
+android/MUChat/captures
