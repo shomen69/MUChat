@@ -12,7 +12,7 @@ If you are too eager then google it.It's not that hard, if a novice like me can 
 Message for those magnanimous persons who are thinking to fork it and understand it (if there any)......
 Please don't find me and kill me(i am sorry for my childish coding, naming conventions, coding without comments...basically for everything...) 
 
-]]></content>
-  <tabTrigger>readme</tabTrigger>
+</content>
+  
 </snippet>
  
