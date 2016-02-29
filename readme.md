@@ -1,19 +1,36 @@
 <snippet>
   <content><![CDATA[
-# ${1:MUChat}
+# ${1:Project Name}
  
-a typical music streaming app with a unique feature .....chat with the listeners, share your feelings about
-the music or....just flirt, it's up to you. 
+TODO: Write a project description
  
 ## Installation
-Installation process and documentation are coming soon...( well not too soon, actually  depends on my mood.......being a lazy and ambivalent person I still don't know, if I'm gonna continue this project in future or not  ;) )
-If you are too eager then google it.It's not that hard, if a novice like me can do it than anybody can....kudos to you.
-
-## BTW
-Message for those magnanimous persons who are thinking to fork it and understand it (if there any)......
-Please don't find me and kill me(i am sorry for my childish coding, naming conventions, coding without comments...basically for everything...) 
-
+ 
+TODO: Describe the installation litigation
+ 
+## Usage
+ 
+TODO: Write usage instructions
+ 
+## Contributing
+ 
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
+ 
+## History
+ 
+TODO: Write history
+ 
+## Credits
+ 
+TODO: Write credits
+ 
+## License
+ 
+TODO: Write license
 ]]></content>
   <tabTrigger>readme</tabTrigger>
 </snippet>
- 
