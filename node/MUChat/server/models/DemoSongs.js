@@ -13,7 +13,7 @@ function createDefaultDemoSongs(songList) {
 	
 	DemoSongs.find({}).exec(function(err, collection) {
 
-		if(collection.length !== 0) {
+		if(collection.length === 0) {
 			var fileName = [];				  	
 		  	async.each(songList,function(sample,next){
 		  		var song = new DemoSongs();
@@ -31,7 +31,7 @@ function createDefaultDemoSongs(songList) {
 		  	
 		  		  	
 		}else{
-			console.log("not empty");
+			console.log("not empty "+collection.length);
 		}
 	})
 }
