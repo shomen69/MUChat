@@ -1,5 +1,4 @@
-var mongoose = require('mongoose'),
-  songsModel = require('../models/Songs');
+var mongoose = require('mongoose');
 
 module.exports = function(config) {
   mongoose.connect(config.db);
@@ -8,8 +7,6 @@ module.exports = function(config) {
   db.once('open', function callback() {
     console.log('mySong db opened');
   });
-
-  // songsModel.createDefaultSongs();
 
 };
 

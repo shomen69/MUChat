@@ -18,20 +18,18 @@ function createDefaultDemoSongs(songList) {
 		  	async.each(songList,function(sample,next){
 		  		var song = new DemoSongs();
 		  		song.title = sample.toString();
-		  		song.save(function(err,saved){
-		  			console.log(saved._id.toString());	
+		  		song.save(function(err,saved){		  			
 		  			fileName.push(saved);	  			
 		  			next();
 		  		});		 		
 		  		
 		  	},function(){
-		  		console.log("all done--"+fileName);	
+		  		console.log("all done--");	
 		  		rename.renameFile(fileName);
-		  	})
-		  	
+		  	})		  	
 		  		  	
 		}else{
-			console.log("not empty "+collection.length);
+			console.log("please drop this collection first");
 		}
 	})
 }

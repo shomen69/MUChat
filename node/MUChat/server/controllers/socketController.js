@@ -13,12 +13,11 @@ var rooms = {};
 var sockets = {};
 
 var data = 	songsController.getSongs(function(err,data){
-				console.log("inside callback "+data);
-				for(var i =0 ;i<data.length;i++){
+				console.log("number of rooms "+data.length);
+				for(var i = 0 ; i < data.length; i++){
 				var id = data[i]._id.toString();
 				rooms[id] = new Room(data[i].title , data[i]._id);           
-				}					
-				console.log("all rooms "+JSON.stringify(Object.keys(rooms)));
+				}	
 			});
 
 
