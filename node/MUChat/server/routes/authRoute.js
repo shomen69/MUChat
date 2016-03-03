@@ -4,11 +4,8 @@ var User = require('../models/UserModel');
 var bCrypt = require('bcrypt-nodejs');
 var jwt    = require('jsonwebtoken');
 var songsController = require('../controllers/songsController');
+var userController = require('../controllers/userController');
 
-// Generates hash using bCrypt
-var createHash = function(password){
-    return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
-}
 
 var isValidPassword = function(user, password){
     return bCrypt.compareSync(password, user.password);
@@ -25,99 +22,71 @@ function decodeJWT(_jwt){
 
 module.exports = function(){
 
-	/* Handle Login POST */
 	router.post('/login', function(req,res){
-
 		var _usr = req.body;
 		console.log("body "+JSON.stringify(_usr));
 
-        User.findOne({ 'email' :  _usr.email }, 
-            function(err, user) {
-                // In case of any error, return using the done method
-                if (err){
-                    console.log(err);
-                    res.json({status:"error",message:"Internal database error",results:[]});
-                }else{
-                	// Username does not exist, log the error and redirect back
-	                if (!user){
-	                    console.log('User Not Found with this email '+_usr.email);   
-	                    res.json({status:"fail",message:"User Not Found with this email",results:[]});     
-                                 
-	                }else{
-	                	// User exists but wrong password, log the error 
-		                if (!isValidPassword(user, _usr.password)){
-		                    console.log('Invalid Password');
-		                    res.json({status:"fail",message:"Invalid password ",results:[]});  
-		                }else{
-					       	// User and password both match, return user from done method
-			                // which will be treated like success
-		                	console.log("user found "+user);
-		                	var jwt_user = {username:user.username, password:user.password}; 
-		        			var token = createJWT(jwt_user);
-		        			console.log("token created "+token);
-		        			var data = [{token : token, name : user.username, id : user._id, email : user.email}]
-			        		res.json({status:"success",message:"User login Successful ",results:data});
-		                }
-	                }
-	                
-                }                
+		userController.getUserByEmail(_usr.email,function(err,user){
+			if(err){
+				console.log('Error in finding user '+err);
+				 res.json({status:"error",message:"Internal database error",results:[]});
+			}else{
 
-            }
-        );
+				if(!user){
+					console.log('User Not Found with this email '+_usr.email);
+					res.json({status:"fail",message:"User Not Found with this email",results:[]});
+				}else{
+					console.log('User Found with this email '+_usr.email);
+					if (!isValidPassword(user, _usr.password)){
+	                    console.log('Invalid Password');
+	                    res.json({status:"fail",message:"Invalid password ",results:[]});		                      
+	                }else{
+	                	console.log('Valid Password ');
+	                	var jwt_user = {username:user.username, password:user.password}; 
+	        			var token = createJWT(jwt_user);
+	        			console.log("token created "+token);
+	        			var data = [{token : token, name : user.username, id : user._id, email : user.email}]
+		        		res.json({status:"success",message:"User login Successful ",results:data});
+	                }
+				}
+			}
+		});        
 	});
 
-	/* Handle Registration POST */
 	router.post('/signup',function(req,res){
 
 		var _user = req.body;
 		console.log("body :"+JSON.stringify(_user));
 
-	    User.findOne({ 'email' : req.body.email }, function(err, user) {
-		    // In case of any error, return using the done method
-		    if (err){
-		        console.log('Error in SignUp: '+err);  
-		        res.json({status:"error",message:"Internal database error",results:[]});          
-		    }
-		    // already exists
-		    if (user) {
-		        console.log('User already exists with this email: '+_user.username);  
-		        res.json({status:"fail",message:"User already exists with this email ",results:[]});     
+		userController.getUserByEmail(_user.email,function(err,user){
+			if(err){
+				console.log('Error in finding user '+err);
+				res.json({status:"fail",message:"Internel DB error..",results:[]});
+			}else{
+				if(user){
+					console.log('User Found with this email '+_user.email);
+					res.json({status:"fail",message:"User already exists with this email ",results:[]});
+				}else{
+					console.log('User not Found with this email '+_user.email);
+					userController.saveUserIntoDB(_user,function(err,savedData){
+						if(err){
+							console.log("Error in saving new user in DB "+err.toString());
+							res.json({status:"fail",message:"Internel DB error..",results:[]});
 
-		    } else {
-		        // if there is no user with that email
-		        // create the user
-		        var newUser = new User();
-
-		        // set the user's local credentials
-		        newUser.username = _user.username;
-		        newUser.password = createHash(_user.password);
-		        newUser.email = _user.email;
-		        newUser.firstName = _user.firstName
-		        newUser.lastName = _user.lastName;
-
-		        console.log("newUser : "+newUser);
-		        // save the user
-		        newUser.save(function(err,savedData) {
-		            if (err){
-		            	console.log(err);
-		                res.json({status:"fail",message:"User already exists with this email ",results:[]});
-		               // throw err;  
-		            }else{
-		            	console.log('User Registration succesful'+JSON.stringify(savedData)); 
-
-		            	var jwt_user = { username:newUser.username, password:newUser.password }; 
-		        		var token = createJWT(jwt_user);
-		        		var decodedJWT = decodeJWT(token);
-		        		console.log("decoded token ......"+JSON.stringify(decodedJWT)); 
-			        	console.log('token creation successful :'+token);
-			        	var data = [{token : token, id : savedData._id, name : savedData.username, email : savedData.email }]
-			        	res.json({status:"success",message:"User Creation Successful ",results:data});
-		            }	            
-		            		            
-	        	});
-        	    	        	 
-	    	}    	
-		});	
+						}else{
+							console.log('user saved into DB '+JSON.stringify(savedData));
+							var jwt_user = { username:savedData.username, password:savedData.password }; 
+			        		var token = createJWT(jwt_user);
+			        		var decodedJWT = decodeJWT(token);
+			        		console.log("decoded token ......"+JSON.stringify(decodedJWT)); 
+				        	console.log('token creation successful :'+token);
+				        	var data = [{token : token, id : savedData._id, name : savedData.username, email : savedData.email }]
+				        	res.json({status:"success",message:"User Creation Successful ",results:data});
+						}
+					})
+				}
+			}
+		});
 	});
 
 	router.get('/songs/:token',function(req, res){
